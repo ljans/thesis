@@ -1,0 +1,80 @@
+\chapter{Setup}
+
+\section{Installation}
+
+\subsection{MiKTeX}
+Um den \LaTeX-Quellcode kompilieren zu können, wird neben dem Texteditor ein weiteres Programm benötigt.
+In dieser Einführung kommt dafür \enquote{MiKTeX} zum Einsatz, das unter \url{https://miktex.org/download} verfügbar ist.
+
+
+\subsection{Visual Studio Code}
+Als Editor für die \LaTeX-Dateien wird hier Visual Studio Code (kurz VS Code) verwendet, der unter \url{https://code.visualstudio.com/} erhältlich ist.
+Nach der Installation können darüber die folgenden Erweiterungen (Extensions) bezogen werden:
+
+\paragraph{\enquote{LaTeX Workshop} von James Yu.}
+Diese Erweiterung stattet VS Code mit umfangreichen Hilfsmitteln rund um \LaTeX\ aus.
+
+\paragraph{\enquote{LTeX -- LanguageTool grammar/spell checking} von Julian Valentin.}
+Dieses Tool bietet eine beeindruckend gute Rechtschreibprüfung für \LaTeX-Dokumente.
+
+
+\subsection{GIT}
+Die flache Dateistruktur von \LaTeX\ eignet sich gut für eine Versionsverwaltung, hier kommt dafür GIT zum Einsatz, das unter \url{https://git-scm.com/download/win} verfügbar ist.
+Bei der Installation werden zahlreiche Konfigurationsmöglichkeiten abgefragt, in den meisten Situationen kann allerdings der Standard verwendet werden.
+
+
+\section{Das Repository}
+
+Nun kann das Repository dieses Projekts von \url{https://github.com/ljans/thesis} geklont werden, am besten in ein Arbeitsverzeichnis wie etwa \texttt{C:\textbackslash Workspace\textbackslash}.
+Hat alles geklappt, dann kann das Projekt jetzt in VS Code geöffnet werden.
+Es enthält bereits einige Ordner und Dateien, deren Bedeutung im Folgenden erklärt wird.
+
+\paragraph{.vscode} Dieser Ordner enthält Konfigurationsdateien für VS Code, in diesem Fall die sogenannten \enquote{Workspace-Settings}.
+Speziell für dieses Projekt werden darin zahlreiche Einstellungen für die Erweiterung \enquote{LaTeX Workshop} getroffen, um ein reibungsloses Arbeiten mit \LaTeX\ zu ermöglichen.
+
+\paragraph{Grafiken} In diesem Ordner werden Screenshots (oder andere Grafiken) abgelegt, die in diesem Dokument eingebunden werden.
+
+\paragraph{Kapitel} Hier sind die Inhalte der jeweiligen Kapitel dieses Dokuments in eigenen Dateien ausgelagert.
+Dadurch lässt sich die Größe der einzelnen Dateien reduzieren und somit die Übersichtlichkeit verbessern.
+
+\paragraph{.gitattributes und .gitignore} Dies sind Konfigurationsdateien für die Versionsverwaltung GIT und können unberührt gelassen werden.
+
+\paragraph{Literatur.bib} In diese Datei werden die (exemplarischen) Quellen der Arbeit in einer speziellen Syntax angelegt.
+Im eigentlichen Dokument wird diese Literaturliste dann eingebunden, um die automatische Erstellung von Quellenangaben in \LaTeX\ nutzen zu können.
+Der Name \enquote{Literatur} kann dabei angepasst werden und auch mehrere Dateien sind möglich.
+
+\paragraph{Thesis.pdf} Dies ist die Ausgabedatei, die von MiKTeX aus dem \LaTeX-Quellcode generiert wird.
+
+\paragraph{Thesis.tex} Hierbei handelt es sich um die \enquote{Hauptdatei} des Projekts.
+In ihr befindet sich die sogenannte \emph{Präambel} mit den Metadaten des Dokuments; darin werden zum Beispiel Funktionspakete geladen, Einstellungen vorgenommen und Makros definiert.
+Neben der Steuerung von Abbildungs-, Inhalts- und Literaturverzeichnis werden in dieser Datei dann auch die ausgelagerten Kapitel eingebunden.
+
+
+\section{Kompilierung}
+
+Ist eine \LaTeX-Datei in VS Code geöffnet, kann über die Erweiterung \enquote{LaTeX Workshop} im linken oberen Teil des Fensters ein manueller Kompiliervorgang gestartet werden (siehe \Cref{fig:Manuelles_Kompilieren}).
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.3\textwidth]{Grafiken/Manuelles_Kompilieren}
+	\caption{Manuelles Kompilieren einer \LaTeX-Datei.}
+	\label{fig:Manuelles_Kompilieren}
+\end{figure}
+Bei der Option \enquote{Full typesetting} wird der Vorgang mehrmals durchlaufen, was gerade beim ersten Mal notwendig ist, damit alle Querverweise und Referenzen richtig zugeordnet werden.
+Das Projekt ist so konfiguriert, dass beim Speichern einer \LaTeX-Datei automatisch ein \enquote{Partial typesetting} ausgeführt wird, das zwar schneller geht, aber nur für Änderungen am Text verwendet werden sollte.
+
+Beim ersten Kompilieren wird MiKTeX erkennen, dass die eingebundenen Pakete zum Teil noch nicht installiert sind und entsprechend dazu auffordern.
+Dieser Vorgang kann einen Moment dauern und sich mehrmals wiederholen.
+Anschließend startet die eigentliche Kompilierung.
+Dabei werden einige Hilfsdokumente im Projekt angelegt, die ein erneutes Kompilieren beschleunigen sollen.
+
+Nun kann das fertige PDF-Dokument angezeigt werden; dafür nutzt man die Schaltfläche im oberen rechten Teil des Fensters, wie in \Cref{fig:PDF_anzeigen} zu sehen.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.4\textwidth]{Grafiken/PDF_anzeigen}
+	\caption{Kompilierte PDF-Datei anzeigen.}
+	\label{fig:PDF_anzeigen}
+\end{figure}
+Wird die Datei auf diesem Weg geöffnet, aktualisiert sich das PDF-Dokument bei jedem erneuten Kompilieren automatisch.
+Darüber hinaus steht so \emph{SyncTeX} zur Verfügung:
+Durch Linksklick auf eine Stelle im PDF-Dokument bei gehaltener \texttt{Strg}-Taste, springt VS Code automatisch an die jeweilige Stelle im Quellcode.
+Andersherum wird die aktuelle Cursorposition in VS Code durch die Tastenkombination \texttt{Strg + Alt + J} im PDF-Dokument hervorgehoben.

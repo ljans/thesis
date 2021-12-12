@@ -1,0 +1,114 @@
+{
+	"latex-workshop.view.pdf.viewer": "browser",
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "Partial typesetting",
+			"tools": [
+				"pdflatex"
+			]
+		},
+		{
+			"name": "Full typesetting",
+			"tools": [
+				"pdflatex",
+				"biber",
+				"pdflatex",
+				"pdflatex"
+			]
+		}
+	],
+	"latex-workshop.latex.tools": [
+		{
+			"name": "pdflatex",
+			"command": "pdflatex",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "biber",
+			"command": "biber",
+			"args": [
+				"%DOCFILE%"
+			],
+			"env": {}
+		}
+	],
+	"latex-workshop.bibtex-format.tab": "tab",
+	"latex-workshop.hover.command.enabled": false,
+	"latex-workshop.latex.clean.fileTypes": [
+		"*.aux",
+		"*.bbl",
+		"*.blg",
+		"*.idx",
+		"*.ind",
+		"*.lof",
+		"*.lot",
+		"*.out",
+		"*.toc",
+		"*.acn",
+		"*.acr",
+		"*.alg",
+		"*.glg",
+		"*.glo",
+		"*.gls",
+		"*.fls",
+		"*.log",
+		"*.fdb_latexmk",
+		"*.snm",
+		"*.synctex(busy)",
+		"*.synctex.gz(busy)",
+		"*.nav",
+		"*.thm",
+		"*.bcf",
+		"*.run.xml"
+	],
+	"latex-workshop.latex.clean.subfolder.enabled": true,
+	"latex-workshop.hover.preview.cursor.symbol": "",
+	"latex-workshop.latex.autoBuild.run": "onSave",
+	"latex-workshop.intellisense.package.enabled": false,
+	"latex-workshop.message.error.show": false,
+	"latex-workshop.message.warning.show": false,
+	"latex-workshop.bind.enter.key": false,
+	"latex-workshop.bibtex-fields.order": [
+		"title",
+		"subtitle",
+		"journaltitle",
+		"series",
+		"author",
+		"editor",
+		"doi",
+		"publisher",
+		"year",
+		"edition",
+		"volume"
+	],
+	"latex-workshop.bibtex-fields.sort.enabled": true,
+	"latex-workshop.bibtex-format.trailingComma": true,
+	"latex-workshop.intellisense.citation.backend": "biblatex",
+	"latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+
+
+
+	"ltex.enabled": [
+		//"bibtex",
+		"latex",
+	],
+	"ltex.language": "de-DE",
+	"ltex.additionalRules.enablePickyRules": true,
+	"ltex.additionalRules.motherTongue": "de-DE",
+	"ltex.latex.commands": {
+		"\\vgl{}{}": "dummy",
+		"\\tcbset{}": "ignore",
+		"\\tcolorboxenvironment{}{}": "ignore",
+		"\\theoremseparator{}": "ignore",
+	},
+
+	"editor.acceptSuggestionOnEnter": "off",
+	"editor.suggest.showSnippets": false,
+	"editor.autoClosingBrackets": "never",
+}

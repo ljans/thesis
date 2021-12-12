@@ -1,0 +1,126 @@
+\documentclass[ngerman,12pt,a4paper]{scrreport} % Koma-Klasse von report
+
+
+
+% == Pakete und Einstellungen ==
+\usepackage[T1]{fontenc} % Westeuropäische Codierung
+\usepackage{amsmath} % Mathematische Umgebungen wie align
+\usepackage{amsfonts} % mathbb-Mengenbuchstaben, Symbole (\square), etc.
+\usepackage[amsmath,thmmarks]{ntheorem} % Satzumgebungen
+\usepackage{graphicx} % Grafiken
+\usepackage[theorems,breakable]{tcolorbox} % Boxen mit Hintergrundfarbe
+\usepackage{hyperref} % Hyperlinks
+\usepackage{cleveref} % Intelligente Querverweise
+
+% Deutsche Anführungszeichen
+\usepackage{babel}
+\usepackage[babel,german=quotes]{csquotes}
+
+% Zitierstil und Quellen
+\usepackage[style=apa]{biblatex}
+\addbibresource{Literatur.bib}
+
+% Hyperlink-Formatierung
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black,
+	citecolor=black,
+}
+\urlstyle{tt}
+
+% == Satzumgbungen ==
+% Syntax: \newtheorem{Name}[Zählung]{Bezeichnung}[Gliederung]
+% "Gliederung" stellt den Gliederungszähler voran (Abschnittsnummer)
+% "Zählung" fasst Satzarten in eine Gruppe zusammen, die sich einen Zähler teilen
+\theorembodyfont{\normalfont}
+\theoremstyle{break}
+\newtheorem{theorem}{Satz}
+\newtheorem{definition}[theorem]{Definition}
+
+% Beweise: Kopf in erster Zeile, Kapitälchen, q.e.d.-Symbol und Trennpunkt
+\theoremstyle{plain}
+\theoremseparator{.}
+\theoremheaderfont{\scshape}
+\theoremsymbol{\quad\ensuremath{\square}}
+\newtheorem*{proof}{Beweis}
+
+% Boxen für Satzumgebungen
+\definecolor{Hellgrau}{RGB}{240,240,240}
+\tcolorboxenvironment{theorem}{
+	breakable,
+	%
+	% Border
+	boxrule=0pt, arc=0pt, boxsep=0pt, colframe=white, colback=Hellgrau,
+	%
+	% Padding
+	top=10pt, left=10pt, right=10pt, bottom=7pt,
+	%
+	% Margin
+	enlarge top by=0pt, enlarge bottom by=0pt,
+}
+
+
+
+% == Makros ==
+\newcommand{\con}[1]{#1^\star} % Konjugierte Zahl
+\newcommand{\sumfty}[1][n]{\sum_{#1=1}^\infty} % Summe von 1 bis Unendlich
+
+% Delimiter
+\newcommand{\abs}[1]{{\lvert#1\rvert}}
+\newcommand{\bracket}[1]{{(#1)}}
+\newcommand{\Bracket}[1]{{\left(#1\right)}}
+\newcommand{\bigBracket}[1]{{\bigl(#1\bigr)}}
+\newcommand{\bigAbs}[1]{{\bigl\lvert#1\bigr\rvert}}
+\newcommand{\braket}[3][]{{\langle#2\vert#3\rangle}_{#1}}
+
+% Spezialbuchstaben
+\newcommand{\CC}{\mathbb{C}} % Komplexe Zahlen
+\newcommand{\RR}{\mathbb{R}} % Reelle Zahlen
+\newcommand{\QQ}{\mathbb{Q}} % Rationale Zahlen
+\newcommand{\ZZ}{\mathbb{Z}} % Ganze Zahlen
+\newcommand{\NN}{\mathbb{N}} % Natürliche Zahlen
+
+
+
+% == Dokumenteninhalt ==
+\begin{document}
+\pagestyle{empty} % Keine Seitenzahlen im Vorspann
+
+% Titelseite
+\title{Eine kleine Einführung in wissenschaftliches Arbeiten mit \textrm\LaTeX}
+\date{Version 1.0\\\today}
+\author{Lukas Jans}
+\maketitle
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+% Abschnittstitel in der Kopfzeile
+\pagestyle{headings}
+
+% Kapitel (mit eigenen Gültigkeitsbereichen)
+{\include{Kapitel/Einleitung}}
+{\include{Kapitel/Setup}}
+{\include{Kapitel/LaTeX}}
+
+% Schlusswort
+\addchap{Schlusswort}
+Diese Einführung konnte hoffentlich einen kleinen Einblick in die Möglichkeiten von \LaTeX\ liefern.
+Allen Lesern wird empfohlen, den Quellcode des Dokuments zu untersuchen, darin zu experimentieren und auszuprobieren -- nur so kann ein sicherer und produktiver Umgang erlernt werden.
+Ausführliche Dokumentationen zu sämtlichen Makros und Prinzipien sind leicht im Internet zu finden.
+Es steht außer Frage, dass sich der Einsatz beim Schreiben einer Abschlussarbeit auszahlen wird.
+
+In Zukunft soll dieses Dokument weiter ausgebaut und mit mehr Screenshots ergänzt werden.
+Wer dabei mitwirken möchte, ist herzlich eingeladen, ein Pull Request auf GitHub zu erstellen.
+
+% Literaturverzeichnis
+\cleardoublepage
+\printbibliography[title=Literaturverzeichnis,heading=bibintoc]
+
+% Abbildungsverzeichnis
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\end{document}

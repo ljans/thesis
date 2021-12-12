@@ -1,0 +1,94 @@
+\chapter{\textrm\LaTeX}
+
+\section{Textmodus}
+
+Dieses Kapitel ist hauptsächlich dafür gedacht, die Ausgabe mit dem Quellcode zu vergleichen, um etwas Erfahrung im Textsatz mit \LaTeX\ zu gewinnen.
+Makros -- die zentralen Steuerelemente -- bestehen aus einem \textbackslash\ gefolgt von einem Namen.
+Die einfachste Gruppe von Makros ist für das Einfügen von Sonderzeichen gedacht, beispielsweise für Symbole wie \checkmark\ aber auch den \LaTeX-Schriftzug.
+
+Andere Makros benötigen ein Argument, das nach dem Namen in geschweiften Klammern angegeben wird.
+Dazu gehören beispielsweise die Makros \texttt{chapter} oder \texttt{section} zum Erstellen von Überschriften.
+Auch Makros zur Formatierung von \textit{kursivem} oder \underline{unterstrichenem} Text funktionieren auf diese Weise.
+
+\textbf{Achtung:} Besteht das Argument aus nur einem Zeichen, kann es ohne Klammern angegeben werden, zum Beispiel \underline so.
+Das hat allerdings zur Folge, dass auch Leerzeichen nach einem Makro als Argument interpretiert werden.
+So wird zwischen den Ausdrücken \LaTeX Test kein Leerzeichen gesetzt, obwohl es im Quellcode vorkommt.
+Auch mehrere Leerzeichen in Folge helfen nicht, da diese    automatisch    reduziert    werden.
+Zur Abhilfe kann hier mit einem Backslash gefolgt von einem Leerzeichen aber bewusst ein Leerzeichen \ \ \ \ gesetzt werden.
+Anspruchsvollere Makros können auch mehrere Argumente erfordern, die dann nacheinander jeweils in geschweiften Klammern dem Namen angehängt werden.
+
+Als Nächstes betrachtet man eine \emph{Umgebung}, die vom Makro \texttt{begin} geöffnet und von \texttt{end} geschlossen wird.
+Darunter fällt zum Beispiel die Aufzählungs-Umgebung \emph{itemize}:
+
+\begin{itemize}
+	\item Erster Aufzählungspunkt
+	\item Zweiter Aufzählungspunkt
+	\item ...
+\end{itemize}
+
+Wurde im Präambel eine Literaturliste geladen, dann können im Text leicht Quellenangaben gemacht werden \parencite{Tonomura}.
+Nach \textcite{Ohanian} stehen hierfür mehrere Makros zur Verfügung.
+Diese lassen einen optionalen Parameter zu, der in eckigen Klammern angegeben wird beispielsweise eine Seitenzahl angibt.
+(vgl. \cite[S. 7]{Tonomura})
+
+
+\section{Mathematikmodus}
+
+Standardmäßig befindet sich \LaTeX\ im \emph{Textmodus}, zum Setzen mathematischer Ausdrücke muss in den \emph{Mathematikmodus} umgeschaltet werden.
+Dies ist zum Beispiel durch das Dollarzeichen \$ möglich.
+In einem Fließtext lässt sich damit eine kleine Formel wie etwa $a = b + c$ einbinden.
+
+Für größere Ausdrücke gibt es eigene Mathematik-Umgebungen, zum Beispiel \texttt{align}:
+\begin{align} \label{eq:Erste_Formel}
+	a = b + c.
+\end{align}
+Hierbei wird automatisch eine Formelnummer generiert, die über \eqref{eq:Erste_Formel} referenziert werden kann, falls ihr ein entsprechendes \texttt{label} zugewiesen wurde.
+Die \emph{gesternte} Umgebung \texttt{align*} unterdrückt das Erzeugen einer Formelnummer.
+
+Im Mathematikmodus gibt es nun eine Fülle weiterer Makros für den Aufbau der gewünschten Ausdrücke.
+Das folgende Beispiel zeigt eine kleine Auswahl.
+Es ist zu beachten, dass Makros allgemein auch verschachtelt genutzt werden können.
+Das doppelte Backslash bewirkt einen Zeilenumbruch.
+
+\begin{align*}
+	f(x) = \alpha x + \beta \\
+	\frac{1}{q} + \frac{1}{p} = n! \\
+	\forall n \in \NN: \sqrt{5\pi^n} \geq 7 \\
+	\mathcal F \vec x =: \lim_{b \to \infty} \int_a^b \langle \psi | \phi \rangle \delta_k(x) \, \mathrm dx.
+\end{align*}
+
+Sollen Formeln an einem bestimmten Zeichen (beispielsweise dem Gleichheitszeichen) ausgerichtet werden, kann das \&-Zeichen davorgesetzt werden.
+Häufig verwendete Formelbausteine können über \texttt{newcommand} als eigene Makros definiert werden (siehe Präambel), um den Code lesbarer zu gestalten:
+\begin{align*}
+	\sumfty \abs{x_n + z_n}^2 &\leq \sumfty \Bracket{\abs{x_n + z_n}^2 + \abs{x_n - z_n}^2}\\
+	&= \sumfty \bigBracket{\bracket{\con x_n + \con z_n}\bracket{x_n + z_n} + \bracket{\con x_n - \con z_n}\bracket{x_n - z_n}}\\
+	&= \sumfty \Bracket{2\abs{x_n}^2 + 2\abs{z_n}^2}\\
+	&= 2 \sumfty \abs{x_n}^2 + 2 \sumfty \abs{z_n}^2 < \infty.
+\end{align*}
+Kleinere Mathematik-Ausdrücke ohne Ausrichtung können etwas kompakter auch über die Umgebung mit den Begrenzern \texttt{\textbackslash[} und \texttt{\textbackslash]} gesetzt werden.
+
+Für mathematische Sätze, Beweise, Definitionen, usw. werden Umgebungen entsprechende Umgebungen eingesetzt.
+Auch diese lassen einen optionalen Parameter zu, der als Titel fungiert.
+
+\begin{definition}[Hilbertraum]
+	Ein Innenproduktraum, der bezüglich der vom Skalarprodukt induzierten Norm vollständig ist, heißt auch \emph{Hilbertraum}.
+\end{definition}
+
+\begin{theorem}[\textsc{Cauchy}-\textsc{Schwarz}'sche Ungleichung]
+	Ist $X$ ein Skalarproduktraum, dann gilt für alle $x, z \in X$
+	\[\bigAbs{\braket xz}^2 \leq \braket xx \braket zz.\]
+\end{theorem}
+
+\begin{proof}
+	Seien $x,z \in X$ beliebig.
+	Da die Behauptung für $z = 0$ trivialerweise erfüllt ist, nimmt man im Folgenden jedoch $z \neq 0$ an.
+	Für alle $\alpha \in \CC$ gilt
+	\[0 \leq \braket{x + \alpha z}{x + \alpha z} = \braket xx + \alpha \braket xz + \con\alpha \braket zx + \abs\alpha^2 \braket zz.\]
+	Einsetzen von
+	\[\alpha = -\frac{\braket zx}{\braket zz} = -\frac{\con{\braket xz}}{\braket zz}\]
+	liefert
+	\[0 \leq \braket xx - \frac{\abs{\braket xz}^2}{\braket zz} - \frac{\abs{\braket zx}^2}{\braket zz} + \frac{\abs{\braket zx}^2}{\braket zz} = \braket xx - \frac{\abs{\braket xz}^2}{\braket zz}\]
+	und nach Multiplikation mit $\braket zz$
+	\[0 \leq \braket xx \braket zz - \abs{\braket xz}^2 \text{,}\]
+	woraus die Behauptung folgt.
+\end{proof}
